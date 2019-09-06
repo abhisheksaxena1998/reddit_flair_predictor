@@ -25,7 +25,7 @@ def index():
 def statistics():
     return flask.render_template('statistics.html')
 
-@app.route("/register", methods=["POST"])
+@app.route("/index", methods=["POST"])
 def register():
     if request.method=='POST':
         nm = request.form.get("url")
@@ -34,7 +34,7 @@ def register():
         reddit = praw.Reddit(client_id='WBTxS7rybznf7Q', client_secret='vJUTUflXITBsQMxeviOfG8mCZoA', user_agent='projectreddit', username='Mysterious_abhE', password='Saxena0705')
         #loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
 
-        filename='Regressor_model.sav'
+        filename='Regressor_model.pkl'
 
         loaded_model =pickle.load(open(filename, 'rb'))
 
