@@ -10,8 +10,6 @@ from nltk.corpus import stopwords
 import os
 import numpy as np
 import flask
-import logging
-
 import pickle
 from flask import Flask, render_template, request
 
@@ -36,7 +34,7 @@ def register():
         reddit = praw.Reddit(client_id='WBTxS7rybznf7Q', client_secret='vJUTUflXITBsQMxeviOfG8mCZoA', user_agent='projectreddit', username='Mysterious_abhE', password='Saxena0705')
         #loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
 
-        filename='Regressor_model.pkl'
+        filename='Regressor_model.sav'
 
         loaded_model =pickle.load(open(filename, 'rb'))
 
@@ -75,14 +73,10 @@ def register():
   
             return loaded_model.predict([data['combine']])
             #print (loaded_model.predict([data['combine']]))
-  
 
         #url='https://www.reddit.com/r/AskReddit/comments/y3tzl/indians_of_reddit_india_is_in_55th_place_in/'
         #detect_flair(nm,loaded_model)
 
 
 
-        return flask.render_template('result.html',prediction=detect_flair(nm,loaded_model),url=nm)
-        app.logger.addHandler(logging.StreamHandler(sys.stdout))
-        app.logger.setLevel(logging.ERROR)  
-       
+        return flask.render_template('index.html',prediction=detect_flair(nm,loaded_model),url=nm)
