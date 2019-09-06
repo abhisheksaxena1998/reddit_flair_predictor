@@ -25,7 +25,7 @@ def index():
 def statistics():
     return flask.render_template('statistics.html')
 
-@app.route("/index", methods=["POST"])
+@app.route('/register', methods=["POST"])
 def register():
     if request.method=='POST':
         nm = request.form.get("url")
@@ -79,4 +79,6 @@ def register():
 
 
 
-        return flask.render_template('index.html',prediction=detect_flair(nm,loaded_model),url=nm)
+        return flask.render_template('register.html',prediction=detect_flair(nm,loaded_model),url=nm)
+
+       
