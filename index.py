@@ -1,12 +1,12 @@
 #importing libraries
-#import sklearn
+import sklearn
 import pickle
 import praw
 import re
 from bs4 import BeautifulSoup
-#import nltk
+import nltk
 # nltk.download('all')
-#from nltk.corpus import stopwords
+from nltk.corpus import stopwords
 import os
 #import numpy as np
 import flask
