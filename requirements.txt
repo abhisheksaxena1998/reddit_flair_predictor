@@ -19,7 +19,6 @@ defusedxml==0.6.0
 docutils==0.15.2
 entrypoints==0.3
 Flask==1.1.1
-gensim==3.8.0
 google-api-python-client==1.7.11
 google-auth==1.6.3
 google-auth-httplib2==0.0.3
