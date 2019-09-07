@@ -15,6 +15,10 @@ from flask import Flask, render_template, request
 
 #creating instance of the class
 app=Flask(__name__)
+filename='Regressor_model.pkl'
+
+loaded_model =pickle.load(open(filename, 'rb'))
+
 
 #to tell flask what url shoud trigger the function index()
 @app.route('/')
@@ -34,10 +38,7 @@ def register():
         reddit = praw.Reddit(client_id='WBTxS7rybznf7Q', client_secret='vJUTUflXITBsQMxeviOfG8mCZoA', user_agent='projectreddit', username='Mysterious_abhE', password='Saxena0705')
         #loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
 
-        filename='Regressor_model.pkl'
-
-        loaded_model =pickle.load(open(filename, 'rb'))
-
+       
         REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
         BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
         STOPWORDS = set(stopwords.words('english'))
@@ -82,5 +83,5 @@ def register():
         return flask.render_template('register.html',prediction=detect_flair(nm,loaded_model),url=nm)
 if __name__ == '__main__':
 
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
        
