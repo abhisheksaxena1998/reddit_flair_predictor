@@ -76,7 +76,7 @@
           
             
                 <div class="container">
-                  <form action="/register" method="post">
+                  <form action="{{ url_for('predict')}}" method="post">
       
                     <h2>Reddit Flair Detector : </h2>
                           
@@ -103,8 +103,8 @@
                     </form> 
                     <div class="container">
                       <h3> <font color="#3333cc">
-                          {{ prediction }} </font></h3>
-                      <p> {{ url }}</p>
+                          {{ prediction_text }} </font></h3>
+                      <p> </p>
               </div>          
                     
                         
