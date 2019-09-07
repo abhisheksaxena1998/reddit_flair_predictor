@@ -15,7 +15,7 @@ from flask import Flask, render_template, request
 
 #creating instance of the class
 app=Flask(__name__)
-filename='Regressor_model.sav'
+filename='Regressor_model.pkl'
 
 loaded_model =pickle.load(open(filename, 'rb'))
 
@@ -27,7 +27,7 @@ def index():
 def statistics():
     return flask.render_template('statistics.html')
 
-@app.route('/register', methods=["POST"])
+@app.route('/predict', methods=["POST"])
 def register():
     if request.method=='POST':
         nm = request.form.get("url")
@@ -79,6 +79,8 @@ def register():
 
 
 
-        return flask.render_template('result.html',prediction=detect_flair(nm,loaded_model),url=nm)
+        return flask.render_template('index.html',prediction_text=detect_flair(nm,loaded_model))
 
        
+if __name__ == "__main__":
+    app.run(debug=True)
