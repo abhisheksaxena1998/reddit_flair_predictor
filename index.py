@@ -1,28 +1,26 @@
 #importing libraries
-import sklearn
+#import sklearn
 import pickle
 import praw
 import re
 from bs4 import BeautifulSoup
-import nltk
+#import nltk
 # nltk.download('all')
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 import os
-import numpy as np
+#import numpy as np
 import flask
-import pickle
+#import pickle
 from flask import Flask, render_template, request
 
 #creating instance of the class
 app=Flask(__name__)
-filename='Regressor_model.pkl'
+filename='Regressor_model.sav'
 
 loaded_model =pickle.load(open(filename, 'rb'))
 
-
 #to tell flask what url shoud trigger the function index()
 @app.route('/')
-@app.route('/index')
 def index():
     return flask.render_template('index.html')
 @app.route('/statistics')
@@ -38,10 +36,11 @@ def register():
         reddit = praw.Reddit(client_id='WBTxS7rybznf7Q', client_secret='vJUTUflXITBsQMxeviOfG8mCZoA', user_agent='projectreddit', username='Mysterious_abhE', password='Saxena0705')
         #loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
 
-       
+      
+
         REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
         BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
-        STOPWORDS = set(stopwords.words('english'))
+        #STOPWORDS = set(stopwords.words('english'))
 
         def clean_text(text):
    
@@ -49,7 +48,7 @@ def register():
             text = text.lower()
             text = REPLACE_BY_SPACE_RE.sub(' ', text)
             text = BAD_SYMBOLS_RE.sub('', text)
-            text = ' '.join(word for word in text.split() if word not in STOPWORDS)
+            #text = ' '.join(word for word in text.split() if word not in STOPWORDS)
             return text
 
         """### Detect Reddit India Post Flair"""
@@ -80,8 +79,6 @@ def register():
 
 
 
-        return flask.render_template('register.html',prediction=detect_flair(nm,loaded_model),url=nm)
-if __name__ == '__main__':
+        return flask.render_template('result.html',prediction=detect_flair(nm,loaded_model),url=nm)
 
-    app.run(debug=True)
        
